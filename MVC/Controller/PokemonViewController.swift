@@ -2,17 +2,23 @@
 //  PokemonViewController.swift
 //  MVC
 //
-//  Created by UNAM on 01/08/25.
+//  Created by Alexis Serapio on 01/08/25.
 //
 
 import UIKit
 
 class PokemonViewController: UIViewController {
+    
+    @IBOutlet weak var TableView: UITableView!
+    let DataManager = PokemonDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        DataManager.fetchPokemon()
+        //print("# de Pokemones : ", DataManager.count())
+        print("# de Pokemones : \(DataManager.count())")
     }
     
 
@@ -26,4 +32,37 @@ class PokemonViewController: UIViewController {
     }
     */
 
+}
+
+//Extensiones (Extensiones usando protocolos) preguntar
+
+extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return DataManager.count()
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Pokemones"
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexpath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let imageView = UIImageView(image: UIImage(named: "Pokemon"))
+//        return imageView
+//    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexpath: IndexPath) -> UITableViewCell{
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for:indexpath) as! PokemonTableViewCell
+        
+        let pokemon = DataManager.getPokemon(at: indexpath.row)
+        cell.PokemonLabel.text = pokemon.name
+        cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id))
+        
+        return cell
+    }
 }
