@@ -10,11 +10,15 @@ import UIKit
 class PokemonViewController: UIViewController {
     
     @IBOutlet weak var TableView: UITableView!
+    
     let DataManager = PokemonDataManager()
-
+    
+    let info_mensaje = "Hola Putos"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         DataManager.fetchPokemon()
         //print("# de Pokemones : ", DataManager.count())
@@ -63,6 +67,20 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
         cell.PokemonLabel.text = pokemon.name
         cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id))
         
+       
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "PokemonSegue", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+
+        let destinationViewController = segue.destination as! ModalViewController
+            
+        destinationViewController.mensaje_recibido = self.info_mensaje
+        }
 }
+
+
