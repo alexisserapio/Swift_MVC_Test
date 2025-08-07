@@ -12,15 +12,14 @@ class PokemonViewController: UIViewController {
     @IBOutlet weak var TableView: UITableView!
     
     let DataManager = PokemonDataManager()
-    
-    let info_mensaje = "Hola Putos"
-    
+    var pokemon_enviado: [Pokemon] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.
         DataManager.fetchPokemon()
-    //print("# de Pokemones : ", DataManager.count())
+        
+        //print("# de Pokemones : ", DataManager.count())
         print("# de Pokemones : \(DataManager.count())")
     }
     
@@ -64,7 +63,7 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
         
         let pokemon = DataManager.getPokemon(at: indexpath.row)
         cell.PokemonLabel.text = pokemon.name
-        cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id))
+        cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id!))
         
        
         return cell
@@ -75,10 +74,10 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-
+        
         let destinationViewController = segue.destination as! ModalViewController
             
-        destinationViewController.mensaje_recibido = self.info_mensaje
+        destinationViewController.pokemon_recibido = self.DataManager.getPokemon(at: 3)
         }
 }
 

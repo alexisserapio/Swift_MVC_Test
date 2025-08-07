@@ -8,17 +8,16 @@
 import UIKit
 
 class ModalViewController: UIViewController {
-   var mensaje_recibido = ""
+    var pokemon_recibido = Pokemon(image_id: nil, name: nil, movement: nil, skill: nil)
     
-
     @IBOutlet weak var pokemonInfoLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
             
-        print("Mensaje recibido: \(mensaje_recibido)")
+        print("Pokemon recibido: \(pokemon_recibido)")
             
-            pokemonInfoLabel.text = mensaje_recibido
+        pokemonInfoLabel.text = pokemon_recibido.skill
             // Do any additional setup after loading the view.
         }
         
