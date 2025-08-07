@@ -18,10 +18,9 @@ class PokemonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+                // Do any additional setup after loading the view.
         DataManager.fetchPokemon()
-        //print("# de Pokemones : ", DataManager.count())
+    //print("# de Pokemones : ", DataManager.count())
         print("# de Pokemones : \(DataManager.count())")
     }
     
@@ -47,7 +46,7 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Pokemones"
+        return "Lista de Pokemones"
     }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexpath: IndexPath) -> CGFloat {
