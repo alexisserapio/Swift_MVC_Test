@@ -63,7 +63,14 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
         
         let pokemon = DataManager.getPokemon(at: indexpath.row)
         cell.PokemonLabel.text = pokemon.name
-        cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id!))
+        
+        if let imageId = pokemon.image_id {
+            cell.PokemonImage.image = UIImage(named: String(describing: imageId))  // "image_3" si image_id es 3
+        } else {
+            cell.PokemonImage.image = UIImage(named: "default_image")  // Imagen por defecto si image_id es nil
+        }
+// Forzando el desempaquetado, no es buena practica
+//        cell.PokemonImage.image = UIImage(named: String(describing: pokemon.image_id!))
         
        
         return cell
@@ -76,9 +83,13 @@ extension PokemonViewController: UITableViewDataSource, UITableViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
         let destinationViewController = segue.destination as! ModalViewController
+        
+        if let indexpath = sender as? IndexPath{
             
-        destinationViewController.pokemon_recibido = self.DataManager.getPokemon(at: 3)
+            destinationViewController.pokemon_recibido = self.DataManager.getPokemon(at: indexpath.row)
         }
+            
+    }
 }
 
 
