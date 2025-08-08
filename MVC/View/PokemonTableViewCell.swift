@@ -13,13 +13,17 @@ class PokemonTableViewCell: UITableViewCell {
     @IBOutlet weak var PokemonImage: UIImageView!
     
     override func awakeFromNib() {
-        super.awakeFromNib()
         // Initialization code
+        super.awakeFromNib()
+        self.backgroundColor = UIColor(named: "CellColor")
+        PokemonLabel.backgroundColor = UIColor(named: "CellColor")
+        
+ 
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     

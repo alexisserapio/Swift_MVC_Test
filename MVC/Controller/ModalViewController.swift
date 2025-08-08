@@ -26,6 +26,8 @@ class ModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(named: "BackgroundColor")
+        
         print("Pokemon recibido: \(pokemon_recibido)")
         
         pokemonNameLabel.text = pokemon_recibido.name
